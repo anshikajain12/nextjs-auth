@@ -7,7 +7,7 @@ connect();
 export async function POST(request: NextRequest) {
     //extract data from token
     const decodedTokenUserId = await getDataFromToken(request);
-    const user = User.findOne({ _id: decodedTokenUserId }).select("-password");
+    const user = await User.findOne({ _id: decodedTokenUserId }).select("-password");
     //check if there is no user
     return NextResponse.json({
         message: "User found",
